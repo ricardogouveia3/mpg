@@ -1,5 +1,11 @@
-const en = 'https://raw.githubusercontent.com/ricardogouveia3/genpass/master/data/words_dictionary_en.json';
-const br = 'https://raw.githubusercontent.com/ricardogouveia3/genpass/master/data/words_dictionary_br.json';
+// Full
+// const en = 'https://raw.githubusercontent.com/ricardogouveia3/genpass/master/data/words_dictionary_en.json';
+// const br = 'https://raw.githubusercontent.com/ricardogouveia3/genpass/master/data/words_dictionary_br.json';
+
+// Reduce
+const en = 'https://raw.githubusercontent.com/ricardogouveia3/mpg/master/data/words_reduce_en.json';
+const br = 'https://raw.githubusercontent.com/ricardogouveia3/mpg/master/data/words_reduce_br.json';
+
 
 let selectedDic;
 let lastSelectedDic;
