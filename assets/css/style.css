@@ -79,7 +79,6 @@ button {
   font-weight: bold;
   cursor: pointer;
   border: 0;
-  max-width: 500px;
 }
 
 #generatedPassword {
@@ -91,6 +90,7 @@ button {
   border: 1px solid black;
   padding: 10px;
   margin-bottom: -1px;
+  max-width: 500px;
 }
 
 #generatedPassword,
