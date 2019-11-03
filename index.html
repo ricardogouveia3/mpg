@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>GenPass - Memorable Password generator</title>
+</head>
+<body>
+  <h1>GenPass - Memorable Password generator</h1>
+  <form action="">
+    <div class="field">
+      <label for="language">Language:</label>
+      <br>
+      <input type="radio" name="language" value="en" checked>English<br>
+      <input type="radio" name="language" value="br">Português Brasileiro<br>
+    </div>
+    <div class="field">
+      <label for="n-components">Number of components:</label>
+      <input id="numberOfComponents" type="number" min="2" max="10" value="3" name="n-components">
+    </div>
+    <div class="field">
+      <label for="n-components">Separator:</label>
+      <select id="selectedSeparator">
+          <option value=".">.</option>
+          <option value="!">!</option>
+          <option value="@">@</option>
+          <option value="-">-</option>
+          <option value="_">_</option>
+        </select> 
+    </div>
+    <button>Generate Password</button>
+  </form>
+
+  <span id="generatedPassword"></span><br><br>
+
+  <table>
+    <thead>
+      <td>Last 5 Generated</td>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+
+  <script src="js/index.js"></script>
+</body>
+</html>
