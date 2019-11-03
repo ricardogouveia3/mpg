@@ -79,6 +79,7 @@ button {
   font-weight: bold;
   cursor: pointer;
   border: 0;
+  max-width: 500px;
 }
 
 #generatedPassword {
