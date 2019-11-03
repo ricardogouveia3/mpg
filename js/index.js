@@ -1,5 +1,5 @@
-const en = 'data/words_dictionary_en.json';
-const br = 'data/words_dictionary_br.json';
+const en = 'https://raw.githubusercontent.com/ricardogouveia3/genpass/master/data/words_dictionary_en.json';
+const br = 'https://raw.githubusercontent.com/ricardogouveia3/genpass/master/data/words_dictionary_br.json';
 
 let selectedDic;
 let lastSelectedDic;
