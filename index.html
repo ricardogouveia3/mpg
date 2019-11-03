@@ -1,48 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>GenPass - Memorable Password Generator</title>
+  <title>MPG - Memorable Password Generator</title>
+  <meta name="description" content="Free secure and memorable password generator.">
+  <meta name="keywords" content="Password, generator">
+  <meta name="author" content="Ricardo Gouveia">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
-  <h1>GenPass - Memorable Password Generator</h1>
-  <form action="">
-    <div class="field">
-      <label for="language">Language:</label>
-      <br>
-      <input type="radio" name="language" value="en" checked>English<br>
-      <input type="radio" name="language" value="br">Português Brasileiro<br>
-    </div>
-    <div class="field">
-      <label for="n-components">Number of components:</label>
-      <input id="numberOfComponents" type="number" min="2" max="10" value="3" name="n-components">
-    </div>
-    <div class="field">
-      <label for="n-components">Separator:</label>
-      <select id="selectedSeparator">
+  <main class="DEF_wrapper">
+    <h1>MPG - Memorable Password Generator</h1>
+    <form action="">
+      <div class="field radio-field">
+        <label for="language-english">English</label>
+        <input type="radio" id="language-english" name="language" value="en" checked>
+        <br>
+        <label for="language-portuguese">Português Brasileiro</label>
+        <input type="radio" id="language-portuguese" name="language" value="br">
+      </div>
+      <div class="field">
+        <label for="n-components">Components:</label>
+        <input id="numberOfComponents" type="number" min="2" max="10" value="3" name="n-components">
+      </div>
+      <div class="field">
+        <label for="n-components">Separator:</label>
+        <select id="selectedSeparator">
           <option value=".">.</option>
           <option value="!">!</option>
           <option value="@">@</option>
           <option value="-">-</option>
           <option value="_">_</option>
-        </select> 
-    </div>
-    <button>Generate Password</button>
-  </form>
+        </select>
+      </div>
+      <button>Generate Password</button>
+    </form>
 
-  <span id="generatedPassword"></span><br><br>
+    <span class="mono-font" id="generatedPassword"></span>
 
-  <table>
-    <thead>
-      <td>Last 5 Generated</td>
-    </thead>
-    <tbody>
+    <table>
+      <thead>
+        <td>Last 5 Generated</td>
+      </thead>
+      <tbody>
 
-    </tbody>
-  </table>
-
+      </tbody>
+    </table>
+  </main>
   <script src="js/index.js"></script>
 </body>
+
 </html>
