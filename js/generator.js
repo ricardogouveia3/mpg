@@ -7,7 +7,7 @@ const en = 'https://raw.githubusercontent.com/ricardogouveia3/mpg/master/data/wo
 const br = 'https://raw.githubusercontent.com/ricardogouveia3/mpg/master/data/words_reduce_br.json';
 
 
-let selectedDic;
+let selectedDic = 'en';
 let lastSelectedDic;
 let selectedSeparator;
 let numberOfComponents;
@@ -15,8 +15,10 @@ let numberOfComponents;
 let generatedPass;
 let lastFiveGeneratedPasses = [];
 const clicableArea = document.querySelector('form');
-const generateButton = document.querySelector('button');
-const lastFiveTable = document.querySelector('tbody');
+const generateButton = document.querySelector('#generateButton');
+const lastFiveTableDesktop = document.querySelector('#tableDesktop tbody');
+const lastFiveTableMobile = document.querySelector('#tableMobile tbody');
+const switchDic = document.querySelector('#dictionaryFrame');
 
 let validLengthWords;
 let choosenWord;
@@ -24,10 +26,21 @@ let choosenWord;
 
 updatePreferences();
 initializeDic();
+
+switchDic.addEventListener('click', function (event) {
+  event.preventDefault();
+  changeDic();
+})
+
 generateButton.addEventListener('click', function (event) {
   event.preventDefault();
   generatePass();
 })
+
+function changeDic() {
+  if ( selectedDic === 'en' ) { selectedDic = 'br'; }
+  else { selectedDic = 'en'; }
+}
 
 function showGenerated() {
   document.querySelector('#generatedPassword').textContent = generatedPass;
@@ -35,19 +48,26 @@ function showGenerated() {
 }
 
 function manageLastFive() {
-  console.log(lastFiveGeneratedPasses);
   lastFiveGeneratedPasses.unshift(generatedPass);
-  if (lastFiveGeneratedPasses.length >= 5) {
+  if (lastFiveGeneratedPasses.length > 5) {
     lastFiveGeneratedPasses.length = 5;
   }
 
-  lastFiveTable.innerHTML = '';
+  lastFiveTableDesktop.innerHTML = '';
+  lastFiveTableMobile.innerHTML = '';
 
   for (pass of lastFiveGeneratedPasses) {
-    let row = lastFiveTable.insertRow();
-    let cell = row.insertCell();
-    let content = document.createTextNode(pass);
-    cell.appendChild(content);
+    let mobileRow = lastFiveTableDesktop.insertRow();
+    let desktopRow = lastFiveTableMobile.insertRow();
+    
+    let desktopCell = desktopRow.insertCell();
+    let mobileCell = mobileRow.insertCell();
+
+    let deskContent = document.createTextNode(pass);
+    desktopCell.appendChild(deskContent);
+
+    let mobileContent = document.createTextNode(pass);
+    mobileCell.appendChild(mobileContent);
   }
 }
 
@@ -94,7 +114,6 @@ function generatePass() {
 }
 
 function updatePreferences() {
-  selectedDic = document.querySelector('input[name="language"]:checked').value;
   if ( selectedDic !== lastSelectedDic ) { initializeDic(); }
 
   selectedSeparator = document.querySelector('#selectedSeparator').value;

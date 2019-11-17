@@ -7,113 +7,200 @@ html {
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
   font-size: 18px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Open sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+
+/* Reset default input/select arrows */
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+select::-ms-expand { display: none; }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] { -moz-appearance:textfield; /* Firefox */ }
+/* *** */
 
 a { text-decoration: none; }
 
 body {
   word-wrap: break-word;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #4A4A4A;
 }
 
-h1 {
-  font-size: 20px;
+h1 { margin: 0; }
+h1 img {
   text-align: center;
-  width: 100%;
+  width: 150px;
+  display: block;
+  margin: 0;
+}
+
+.full-frame {
+  background-color: #fff;
+  border: 0;
+  border-radius: 7px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, .5);
+  padding: 24px;
+  max-width: 800px;
 }
 
 .DEF_wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 20px; /**/
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
+.config-table {
+  display: flex;
+  justify-content: space-around;
+  margin: 24px 0;
+  width: 100%;
+}
+
 form {
-  border: 1px solid black;
-  padding: 10px 15px;
+  margin-right: 0;
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 500px;
+}
+@media ( min-width: 620px ) {
+  form {
+    margin-right: 12px;
+    max-width: calc( 50% - 12px );
+  }
 }
 
-form .field {
+
+.field {
   margin: 10px 0;
   display: block;
 }
 
+.double-field { display: flex; }
+
+.double-field .field:last-child {
+    margin-left: 24px;
+    width: 100%;
+}
+
+@media ( min-width: 620px ) { form { min-width: 300px; } }
+
 label {
   display: block;
   font-size: 13px;
-  color: dimgray;
+  color: #8A8A8A;
+  font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 5px;
 }
 
 input, select {
   width: 100%;
-  border-radius: 0;
-  border: 1px solid gray;
+  border-radius: 7px;
+  padding: 5px;
+  border: 2px solid #8A8A8A;
+  color: #8A8A8A;
+  font-weight: bold;
+  font-size: 16px;
 }
 
-.radio-field span { 
-  display: block;
-  color: black;
-  text-transform: uppercase;
-  margin-bottom: 5px;
+.switch-frame {
+  background-color: #4A4A4A;
+  padding: 5px;
+  margin-right: 24px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all .3s ease;
 }
-.radio-field label { display: inline-block; }
-.radio-field input { width: unset; }
 
-button {
+.flag { width: 20px; }
+
+#generateButton {
   width: 100%;
   padding: 15px;
   margin-top: 20px;
-  background-color: dimgray;
+  background-color: #353B48;
   text-transform: uppercase;
   color: white;
   font-weight: bold;
   cursor: pointer;
   border: 0;
+  border-radius: 7px;
 }
 
 #generatedPassword {
-  background-color: black;
+  background-color: #4A4A4A;
   color: white;
   display: block;
   width: 100%;
   text-align: center;
   border: 1px solid black;
-  padding: 10px;
-  margin-bottom: -1px;
-  max-width: 500px;
+  border-radius: 7px;
+  padding: 15px 10px;
+  margin-bottom: 24px;
+  cursor: pointer;
+  width: 100%;
 }
+@media ( min-width: 620px ) { #generatedPassword { margin-bottom: -1px; } }
 
 #generatedPassword,
 tbody td { font-family: monospace; }
 
+.table-wrapper {
+  margin-left: 12px;
+  width: 300px;
+  display: none;
+}
+@media ( min-width: 620px ) {
+  .table-wrapper {
+    width: unset;
+    max-width: calc( 50% - 12px );
+    display: block;
+  }
+}
+
 table {
-  border: 1px solid black;
-  margin: 0;
-  margin-top: 20px;
+  border: 2px solid #8A8A8A;
+  border-radius: 7px;
   padding: 0;
   word-wrap: break-word;
   table-layout: fixed;
   width: 100%;
-  max-width: 500px;
 }
 
 table td {
-  text-align: center;
+  text-align: left;
   padding: 5px;
-
-}
-thead td {
-  text-transform: uppercase;
-  border-bottom: 1px solid black;
+  color: #8A8A8A;
   font-weight: bold;
+}
+@media ( min-width: 620px ) { .table-mobile { display: none; } }
+
+.end-text {
+  display: block;
+  color: #8A8A8A;
+  font-weight: bold;
+  max-width: 700px;
+  line-height: 1.5;
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.end-text a {
+  text-decoration: underline;
+  color: inherit;
+  font-size: inherit;
 }

@@ -12,48 +12,67 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="assets/img/favicon.png" />
 </head>
 
 <body>
-  <main class="DEF_wrapper">
-    <h1>MPG - Memorable Password Generator</h1>
-    <form action="">
-      <div class="field radio-field">
-        <label for="language-english">English</label>
-        <input type="radio" id="language-english" name="language" value="en" checked>
-        <br>
-        <label for="language-portuguese">Português Brasileiro</label>
-        <input type="radio" id="language-portuguese" name="language" value="br">
-      </div>
-      <div class="field">
-        <label for="n-components">Components:</label>
-        <input id="numberOfComponents" type="number" min="2" max="10" value="3" name="n-components">
-      </div>
-      <div class="field">
-        <label for="n-components">Separator:</label>
-        <select id="selectedSeparator">
-          <option value=".">.</option>
-          <option value="!">!</option>
-          <option value="@">@</option>
-          <option value="-">-</option>
-          <option value="_">_</option>
-        </select>
-      </div>
-      <button>Generate Password</button>
-    </form>
+  <main class="DEF_wrapper full-frame">
+    <h1>
+      <a href="/">
+        <img src="assets/img/logo.png" alt="MPG - Memorable Password Generator">
+      </a>
+    </h1>
+
+    <div class="config-table">
+      <form action="">
+        <div class="double-field">
+            <div class="field">
+              <label for="n-components">Dictionary:</label>
+              <div class="switch-frame" id="dictionaryFrame">
+                <img src="assets/img/flag/us.png" id="dictionaryLanguage" alt="Dictionary language" class="flag">
+              </div>
+            </div>
+            <div class="field">
+              <label for="n-components">Components:</label>
+              <input id="numberOfComponents" type="number" min="2" max="6" value="3" name="n-components">
+            </div>
+        </div>
+
+          <div class="field">
+            <label for="n-components">Separator:</label>
+            <select id="selectedSeparator">
+              <option value=".">.</option>
+              <option value="!">!</option>
+              <option value="@">@</option>
+              <option value="-">-</option>
+              <option value="_">_</option>
+            </select>
+          </div>
+          <button id="generateButton">Generate Password</button>
+        </form>
+
+        <div class="table-wrapper">
+          <label for="">Last 5</label>
+          <table id="tableDesktop" class="table-desktop">
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+
 
     <span class="mono-font" id="generatedPassword"></span>
-
-    <table>
-      <thead>
-        <td>Last 5 Generated</td>
-      </thead>
+    <table id="tableMobile" class="table-mobile">
       <tbody>
-
       </tbody>
     </table>
+
+
   </main>
-  <script src="js/index.js"></script>
+  <span class="end-text">Use <a target="_blank" href="https://www.mozilla.org/en-US/firefox/lockwise/">Firefox Lockwise</a> as your password manager - it’s free!</span>
+  <script src="js/generator.js"></script>
+  <script src="js/ui.js"></script>
 </body>
 
 </html>
