@@ -1,49 +1,56 @@
-// Dics
-const en = 'https://api.rcrd.me/mpg/en';
-const br = 'https://api.rcrd.me/mpg/br';
+// dics URLs
+const dictonariesURLs = {
+  en: 'https://api.rcrd.me/mpg/en',
+  br: 'https://api.rcrd.me/mpg/br'
+}
 
+const dictonariesContent = {
+  english: [],
+  portuguese: []
+}
 
-let selectedDic = 'en';
-let lastSelectedDic;
-let selectedSeparator;
-let numberOfComponents;
+// preferences
+const preferences = {
+  selectedDic: 'en',
+  lastSelectedDic: 'en',
+  selectedSeparator: '.',
+  numberOfComponents: 3
+}
 
-let generatedPass;
-let lastFiveGeneratedPasses = [];
-const clicableArea = document.querySelector('form');
+// html elements
 const generateButton = document.querySelector('#generateButton');
 const lastFiveTableDesktop = document.querySelector('#tableDesktop tbody');
 const lastFiveTableMobile = document.querySelector('#tableMobile tbody');
-const switchDic = document.querySelector('#dictionaryFrame');
+const dicSeletor = document.querySelector('#dictionarySelector');
+const separatorSelector = document.querySelector('#selectedSeparator');
+const componentsQuantity = document.querySelector('#numberOfComponents');
 
+// variables
+let lastFiveGeneratedPasses = [];
 let validLengthWords;
 let choosenWord;
 
+// App startup
+initializeApp();
 
-updatePreferences();
-initializeDic();
-
-switchDic.addEventListener('click', function (event) {
-  event.preventDefault();
-  changeDic();
-})
-
+// event listeners
 generateButton.addEventListener('click', function (event) {
   event.preventDefault();
   generatePass();
 })
 
-function changeDic() {
-  if (selectedDic === 'en') { selectedDic = 'br'; }
-  else { selectedDic = 'en'; }
+// functions
+function initializeApp() {
+  updatePreferences();
+  initializeDic(true);
 }
 
-function showGenerated() {
+function showGenerated(generatedPass) {
   document.querySelector('#generatedPassword').textContent = generatedPass;
-  manageLastFive();
+  manageLastFive(generatedPass);
 }
 
-function manageLastFive() {
+function manageLastFive(generatedPass) {
   lastFiveGeneratedPasses.unshift(generatedPass);
   if (lastFiveGeneratedPasses.length > 5) {
     lastFiveGeneratedPasses.length = 5;
@@ -67,53 +74,67 @@ function manageLastFive() {
   }
 }
 
-
-function getDictionary(url) {
-  lastSelectedDic = url;
-  return fetch(eval(url));
+function getDictionaries() {
+  dictonariesContent.english = fetch(dictonariesURLs.en).then(
+    response => response.json(),
+  );
+  dictonariesContent.portuguese = fetch(dictonariesURLs.br).then(
+    response => response.json(),
+  );
 }
 
-function initializeDic() {
-  let words = getDictionary(selectedDic);
-  let firstRun = true;
+function initializeDic(firstrun) {
+  if (dictonariesContent.english.length === 0) {
+    getDictionaries();
+  }
+
+  let words = null;
+
+  switch (preferences.selectedDic) {
+    case 'br':
+      words = dictonariesContent.portuguese;
+      break;
+
+    case 'en':
+    default:
+      words = dictonariesContent.english;
+      break;
+  }
 
   words.then(
-    response => response.json()).then(
-      arrayOfWords => {
-        const words = arrayOfWords;
+    arrayOfWords => {
+      const words = arrayOfWords;
 
-        validLengthWords = words.filter((word) => {
-          if (word.length >= 3 && word.length <= 8 && !word.contai) { return true; } else { return false; }
-        });
+      validLengthWords = words.filter((word) => {
+        if (word.length >= 3 && word.length <= 8 && !word.contai) { return true; } else { return false; }
+      });
 
-        validLengthWords = validLengthWords.map((word) => { return word.replace(/[1-9]/g, ''); })
-        validLengthWords = validLengthWords.map((word) => { return word.replace(/[1-9]/g, ''); })
+      validLengthWords = validLengthWords.map((word) => { return word.replace(/[1-9]/g, ''); });
 
-        if (firstRun) {
-          firstRun = false;
-          generatePass();
-        }
-      })
+      (firstrun) ? generatePass() : ''; // should'n be here; get this async to solve it 
+    })
 }
 
 function generatePass() {
   updatePreferences();
-  generatedPass = '';
-  numberOfComponents = +numberOfComponents;
+  let generatedPass = '';
 
-  for (var i = 0; i < numberOfComponents; i++) {
-    if (i != numberOfComponents - 1) {
-      generatedPass += randomWord() + selectedSeparator;
+  for (var i = 0; i < preferences.numberOfComponents; i++) {
+    if (i != preferences.numberOfComponents - 1) {
+      generatedPass += randomWord() + preferences.selectedSeparator;
     } else { generatedPass += randomInt(); }
   }
-  showGenerated();
+
+  showGenerated(generatedPass);
 }
 
 function updatePreferences() {
-  if (selectedDic !== lastSelectedDic) { initializeDic(); }
+  preferences.lastSelectedDic = preferences.selectedDic;
+  preferences.selectedDic = dicSeletor.value;
+  preferences.selectedSeparator = separatorSelector.value;
+  preferences.numberOfComponents = componentsQuantity.value;
 
-  selectedSeparator = document.querySelector('#selectedSeparator').value;
-  numberOfComponents = document.querySelector('#numberOfComponents').value;
+  if (preferences.lastSelectedDic !== preferences.selectedDic) { initializeDic(false) }
 }
 
 function randomWord() { return validLengthWords[Math.floor(Math.random() * validLengthWords.length)]; }

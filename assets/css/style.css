@@ -72,6 +72,7 @@ form {
   margin-right: 0;
   display: flex;
   flex-direction: column;
+  gap: 15px;
   width: 100%;
 }
 @media ( min-width: 620px ) {
@@ -81,17 +82,16 @@ form {
   }
 }
 
-
-.field {
-  margin: 10px 0;
-  display: block;
+.double-field {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
 }
 
-.double-field { display: flex; }
-
-.double-field .field:last-child {
-    margin-left: 24px;
-    width: 100%;
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 @media ( min-width: 620px ) { form { min-width: 300px; } }
@@ -107,12 +107,16 @@ label {
 
 input, select {
   width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   border-radius: 7px;
   padding: 5px;
   border: 2px solid #8A8A8A;
   color: #8A8A8A;
   font-weight: bold;
   font-size: 16px;
+  min-height: 36px;
 }
 
 .switch-frame {
@@ -131,7 +135,6 @@ input, select {
 #generateButton {
   width: 100%;
   padding: 15px;
-  margin-top: 20px;
   background-color: #353B48;
   text-transform: uppercase;
   color: white;
@@ -142,6 +145,7 @@ input, select {
 }
 
 #generatedPassword {
+  font-family: monospace;
   background-color: #4A4A4A;
   color: white;
   display: block;
@@ -153,11 +157,16 @@ input, select {
   margin-bottom: 24px;
   cursor: pointer;
   width: 100%;
+  min-height: 51px;
 }
 @media ( min-width: 620px ) { #generatedPassword { margin-bottom: -1px; } }
 
-#generatedPassword,
-tbody td { font-family: monospace; }
+tbody td,
+tbody tr {
+  font-family: monospace;
+  display: block;
+  height: 35px;
+}
 
 .table-wrapper {
   margin-left: 12px;
@@ -179,6 +188,7 @@ table {
   word-wrap: break-word;
   table-layout: fixed;
   width: 100%;
+  min-height: 183px;
 }
 
 table td {
