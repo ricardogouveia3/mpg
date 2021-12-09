@@ -1,5 +1,7 @@
 # MPG
 
+_*ESTE PROJETO FOI DEPRECIADO E NÃO É MAIS MANTIDO*_
+
 Gerador de senhas em formato x.y.0 em JS.
 
 O projeto é replicado na [MPG Browser Extension](https://github.com/ricardogouveia3/mpg-webext). Futuramente, o projeto pretende ser replicado também em um app mobile.
